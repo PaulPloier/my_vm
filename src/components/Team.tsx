@@ -62,8 +62,6 @@ const teamMembers = [
   },
 ];
 
-const cardOffsets = ['', 'lg:translate-y-8', 'lg:-translate-y-4', 'lg:translate-y-10', '', 'lg:-translate-y-6'];
-
 export const Team: React.FC = () => {
   const [featured, ...others] = teamMembers;
 
@@ -86,28 +84,28 @@ export const Team: React.FC = () => {
           </p>
         </motion.div>
 
-        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.82fr)_minmax(0,1.18fr)]">
+        <div className="grid gap-8 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)]">
           <motion.article
             initial={{ opacity: 0, y: 24 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-120px' }}
             transition={{ duration: 0.6 }}
-            className="paper-panel overflow-hidden rounded-[2rem]"
+            className="paper-panel overflow-hidden border border-line"
           >
             <div className="relative">
               <img
                 src={featured.image}
                 alt={featured.name}
-                className="aspect-[4/5] w-full object-cover grayscale-[15%]"
+                className="aspect-[4/5] w-full object-cover"
                 loading="lazy"
               />
-              <div className="absolute left-5 top-5 rounded-full bg-paper/90 px-4 py-2 text-xs uppercase tracking-[0.22em] text-primary">
+              <div className="absolute left-5 top-5 bg-paper px-4 py-2 text-xs uppercase tracking-[0.22em] text-primary">
                 Geschäftsführung
               </div>
             </div>
-            <div className="space-y-4 p-6">
+            <div className="space-y-4 border-t border-line p-6">
               <div>
-                <h3 className="text-3xl text-secondary">{featured.name}</h3>
+                <h3 className="text-3xl font-semibold text-secondary">{featured.name}</h3>
                 <p className="mt-2 text-sm uppercase tracking-[0.18em] text-neutral-muted">{featured.role}</p>
               </div>
               <div className="flex flex-col gap-3 border-t border-line pt-5 text-sm text-neutral-muted sm:flex-row sm:items-center sm:gap-5">
@@ -123,7 +121,7 @@ export const Team: React.FC = () => {
             </div>
           </motion.article>
 
-          <div className="grid gap-6 sm:grid-cols-2">
+          <div className="grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
             {others.map((member, index) => (
               <motion.article
                 key={member.email}
@@ -131,34 +129,31 @@ export const Team: React.FC = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-120px' }}
                 transition={{ duration: 0.5, delay: index * 0.04 }}
-                className={`paper-panel group overflow-hidden rounded-[1.8rem] ${cardOffsets[index] ?? ''}`}
+                className="paper-panel group overflow-hidden border border-line"
               >
-                <div className="relative overflow-hidden">
+                <div className="relative overflow-hidden border-b border-line">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
+                    className="aspect-[4/5] w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
                     loading="lazy"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-secondary/75 via-secondary/10 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
-                  <div className="absolute inset-x-4 bottom-4 translate-y-4 opacity-0 transition-all duration-300 group-hover:translate-y-0 group-hover:opacity-100">
-                    <div className="rounded-[1.2rem] bg-paper/90 p-4 text-sm text-secondary shadow-[0_10px_28px_rgba(34,49,56,0.16)]">
-                      <a href={`mailto:${member.email}`} className="block truncate transition-colors hover:text-primary">
-                        {member.email}
-                      </a>
-                      {member.phone && member.telLink ? (
-                        <a href={member.telLink} className="mt-2 block transition-colors hover:text-primary">
-                          {member.phone}
-                        </a>
-                      ) : (
-                        <p className="mt-2 text-neutral-muted">Kontakt über das Büro</p>
-                      )}
-                    </div>
-                  </div>
                 </div>
-                <div className="p-5">
-                  <h3 className="text-2xl leading-tight text-secondary">{member.name}</h3>
+                <div className="flex h-full flex-col p-5">
+                  <h3 className="text-2xl font-semibold leading-tight text-secondary">{member.name}</h3>
                   <p className="mt-2 text-[0.78rem] uppercase tracking-[0.12em] text-neutral-muted">{member.role}</p>
+                  <div className="mt-5 space-y-2 border-t border-line pt-4 text-sm text-neutral-muted">
+                    <a href={`mailto:${member.email}`} className="block truncate transition-colors hover:text-primary">
+                      {member.email}
+                    </a>
+                    {member.phone && member.telLink ? (
+                      <a href={member.telLink} className="block transition-colors hover:text-primary">
+                        {member.phone}
+                      </a>
+                    ) : (
+                      <p>Kontakt über das Büro</p>
+                    )}
+                  </div>
                 </div>
               </motion.article>
             ))}

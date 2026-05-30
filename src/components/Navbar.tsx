@@ -68,8 +68,8 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAppointment }) => {
       <header
         className={`fixed inset-x-0 top-0 z-40 transition-all duration-300 ${
           isScrolled
-            ? 'border-b border-line/80 bg-paper/95 py-3 shadow-[0_12px_35px_rgba(34,49,56,0.08)] backdrop-blur-sm'
-            : 'bg-transparent py-5'
+            ? 'border-b border-line bg-paper/95 py-3 shadow-[0_10px_24px_rgba(44,49,52,0.08)] backdrop-blur-sm'
+            : 'bg-paper/90 py-4'
         }`}
       >
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 sm:px-6 lg:px-8">
@@ -79,7 +79,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAppointment }) => {
             className="min-w-0 flex items-center gap-4 focus:outline-none"
             aria-label="my Versicherungsmakler GmbH Startseite"
           >
-            <span className="flex h-12 w-12 items-center justify-center rounded-[1.35rem] border border-primary/20 bg-white text-2xl font-semibold italic text-primary shadow-[0_12px_24px_rgba(28,106,97,0.08)]">
+            <span className="flex h-12 w-12 items-center justify-center border border-line bg-white text-2xl font-semibold italic text-primary">
               my
             </span>
             <span className="hidden min-w-0 text-left sm:block">
@@ -118,17 +118,14 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAppointment }) => {
               <Phone className="h-4 w-4" />
               +43 (0) 7289 / 5072
             </a>
-            <button
-              onClick={onOpenAppointment}
-              className="rounded-full bg-accent px-5 py-2.5 text-sm font-semibold text-secondary transition-transform duration-200 hover:-translate-y-0.5"
-            >
+            <button onClick={onOpenAppointment} className="bg-primary px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-primary-light">
               Termin vereinbaren
             </button>
           </div>
 
           <button
             onClick={() => setIsOpen((value) => !value)}
-            className="flex items-center justify-center rounded-full border border-line bg-paper/90 p-2 text-secondary md:hidden"
+            className="flex items-center justify-center border border-line bg-paper p-2 text-secondary md:hidden"
             aria-expanded={isOpen}
             aria-label="Navigation öffnen"
           >
@@ -180,7 +177,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAppointment }) => {
               <div className="space-y-4">
                 <a
                   href="tel:+4372895072"
-                  className="flex items-center justify-center gap-2 rounded-full border border-line px-4 py-3 text-sm text-secondary"
+                  className="flex items-center justify-center gap-2 border border-line px-4 py-3 text-sm text-secondary"
                 >
                   <Phone className="h-4 w-4" />
                   +43 (0) 7289 / 5072
@@ -190,7 +187,7 @@ export const Navbar: React.FC<NavbarProps> = ({ onOpenAppointment }) => {
                     setIsOpen(false);
                     onOpenAppointment();
                   }}
-                  className="w-full rounded-full bg-accent px-4 py-3 text-sm font-semibold text-secondary"
+                  className="w-full bg-primary px-4 py-3 text-sm font-semibold text-white"
                 >
                   Termin vereinbaren
                 </button>
