@@ -52,6 +52,12 @@ body {
   overflow-x: clip;
 }
 
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
 a,
 button,
 input,
@@ -141,7 +147,7 @@ h6 {
 
 ::-webkit-scrollbar-thumb {
   background: rgba(28, 106, 97, 0.4);
-  border-radius: 999px;
+  border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
