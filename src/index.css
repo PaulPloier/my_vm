@@ -5,18 +5,18 @@
   --font-sans: "Source Serif 4", Georgia, serif;
   --font-heading: "Playfair Display", Georgia, serif;
 
-  --color-primary: #1c6a61;
-  --color-primary-light: #2d8a7d;
-  --color-primary-dark: #123f3d;
-  --color-secondary: #223138;
-  --color-secondary-soft: #526167;
-  --color-accent: #b68a4d;
-  --color-accent-soft: #dec9a6;
-  --color-neutral-dark: #243036;
-  --color-neutral-muted: #66757a;
-  --color-neutral-light: #f6f1e7;
-  --color-paper: #fcfaf5;
-  --color-line: #d8d0c0;
+  --color-primary: #85004d;
+  --color-primary-light: #b6097b;
+  --color-primary-dark: #5f0037;
+  --color-secondary: #2c3134;
+  --color-secondary-soft: #414447;
+  --color-accent: #85004d;
+  --color-accent-soft: #b6097b;
+  --color-neutral-dark: #2c3134;
+  --color-neutral-muted: #727171;
+  --color-neutral-light: #f7f5f6;
+  --color-paper: #ffffff;
+  --color-line: #e5e5e5;
 }
 
 :root {
@@ -38,8 +38,8 @@ body {
   max-width: 100%;
   font-family: var(--font-sans);
   background:
-    radial-gradient(circle at top left, rgba(28, 106, 97, 0.08), transparent 28%),
-    linear-gradient(180deg, #fbf8f1 0%, #f4efe4 100%);
+    radial-gradient(circle at top left, rgba(133, 0, 77, 0.08), transparent 28%),
+    linear-gradient(180deg, #fbf9fa 0%, #f4f1f3 100%);
   color: var(--color-neutral-dark);
   overflow-x: clip;
   -webkit-font-smoothing: antialiased;
@@ -83,7 +83,7 @@ h6 {
 }
 
 ::selection {
-  background: rgba(28, 106, 97, 0.18);
+  background: rgba(133, 0, 77, 0.18);
   color: var(--color-primary-dark);
 }
 
@@ -97,7 +97,7 @@ h6 {
   inset: 0 auto auto 0;
   width: min(220px, 34vw);
   height: 1px;
-  background: linear-gradient(90deg, rgba(28, 106, 97, 0.55), rgba(28, 106, 97, 0));
+  background: linear-gradient(90deg, rgba(133, 0, 77, 0.55), rgba(133, 0, 77, 0));
 }
 
 .eyebrow {
@@ -120,9 +120,9 @@ h6 {
 }
 
 .paper-panel {
-  background: rgba(252, 250, 245, 0.88);
-  border: 1px solid rgba(216, 208, 192, 0.9);
-  box-shadow: 0 18px 50px rgba(34, 49, 56, 0.08);
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(229, 229, 229, 0.95);
+  box-shadow: 0 18px 50px rgba(44, 49, 52, 0.08);
 }
 
 .grain-outline {
@@ -133,7 +133,7 @@ h6 {
   content: "";
   position: absolute;
   inset: 1rem -1rem -1rem 1rem;
-  border: 1px solid rgba(28, 106, 97, 0.18);
+  border: 1px solid rgba(133, 0, 77, 0.18);
   pointer-events: none;
 }
 
@@ -142,14 +142,14 @@ h6 {
 }
 
 ::-webkit-scrollbar-track {
-  background: rgba(216, 208, 192, 0.55);
+  background: rgba(229, 229, 229, 0.75);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(28, 106, 97, 0.4);
+  background: rgba(133, 0, 77, 0.4);
   border-radius: 0;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(28, 106, 97, 0.65);
+  background: rgba(133, 0, 77, 0.65);
 }
