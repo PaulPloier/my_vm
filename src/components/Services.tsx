@@ -1,153 +1,115 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import {
-  Briefcase,
-  Home,
-  HeartPulse,
-  Activity,
-  Car,
-  Wheat,
-  Sofa,
-  TrendingUp,
-  Scale,
-  ArrowUpRight,
-} from 'lucide-react';
 
 interface ServicesProps {
   onSelectService: (serviceKey: string) => void;
 }
 
+const services = [
+  {
+    key: 'betrieb',
+    title: 'Betrieb',
+    description: 'Versicherungslösungen für Unternehmen, Mitarbeiter und Haftungsfragen.',
+  },
+  {
+    key: 'eigenheim',
+    title: 'Eigenheim',
+    description: 'Schutz für das Haus, das Sie aufgebaut haben, vom Fundament bis zum Dach.',
+  },
+  {
+    key: 'krankheit',
+    title: 'Unfall/Krankheit',
+    description: 'Absicherung für den Fall, dass Gesundheit plötzlich zum zentralen Thema wird.',
+  },
+  {
+    key: 'berufsunfaehigkeit',
+    title: 'Berufsunfähigkeit',
+    description: 'Finanzielle Sicherheit, wenn Ihre Arbeitskraft nicht mehr selbstverständlich ist.',
+  },
+  {
+    key: 'kfz',
+    title: 'KFZ',
+    description: 'Vergleiche für Haftpflicht, Kasko und Fuhrparks, damit Sie beruhigt unterwegs sind.',
+  },
+  {
+    key: 'landwirtschaft',
+    title: 'Landwirtschaft',
+    description: 'Lösungen für Betriebe, Maschinen, Gebäude und alles, was Verantwortung trägt.',
+  },
+  {
+    key: 'haushalt',
+    title: 'Haushalt',
+    description: 'Schutz für Einrichtung, Hausrat und den Alltag zuhause.',
+  },
+  {
+    key: 'vorsorge',
+    title: 'Vorsorge/Leben',
+    description: 'Langfristige Vorsorge, damit Zukunft planbar bleibt.',
+  },
+  {
+    key: 'rechtsschutz',
+    title: 'Rechtsschutz',
+    description: 'Absicherung, wenn gute Beratung auch juristisch Rückhalt braucht.',
+  },
+];
+
 export const Services: React.FC<ServicesProps> = ({ onSelectService }) => {
-  const servicesList = [
-    {
-      key: 'betrieb',
-      icon: Briefcase,
-      title: 'Betrieb',
-      description: 'Maßgeschneiderter Schutz für Ihr Unternehmen, Ihre Mitarbeiter und Betriebshaftpflichtrisiken.',
-    },
-    {
-      key: 'eigenheim',
-      icon: Home,
-      title: 'Eigenheim',
-      description: 'Die optimale Absicherung für Ihr Wohngebäude gegen Brand, Sturm, Leitungswasser und andere Gefahren.',
-    },
-    {
-      key: 'krankheit',
-      icon: HeartPulse,
-      title: 'Unfall/Krankheit',
-      description: 'Rundumschutz bei Freizeitunfällen und optimale private medizinische Vorsorge im Krankheitsfall.',
-    },
-    {
-      key: 'berufsunfaehigkeit',
-      icon: Activity,
-      title: 'Berufsunfähigkeit',
-      description: 'Finanzielle Absicherung Ihrer Existenz bei gesundheitlich bedingtem Ausfall der Arbeitskraft.',
-    },
-    {
-      key: 'kfz',
-      icon: Car,
-      title: 'KFZ',
-      description: 'Haftpflicht- und Kaskoversicherungen für Ihren PKW, LKW, Motorrad oder Fuhrpark zu besten Konditionen.',
-    },
-    {
-      key: 'landwirtschaft',
-      icon: Wheat,
-      title: 'Landwirtschaft',
-      description: 'Spezialisierte Risikoabdeckung für landwirtschaftliche Betriebe, Gebäude, Maschinen und Tierbestände.',
-    },
-    {
-      key: 'haushalt',
-      icon: Sofa,
-      title: 'Haushalt',
-      description: 'Schutz für Ihren gesamten Hausrat und Einrichtungsgegenstände inklusive integrierter Privathaftpflicht.',
-    },
-    {
-      key: 'vorsorge',
-      icon: TrendingUp,
-      title: 'Vorsorge/Leben',
-      description: 'Weitsichtige Lebens- und Rentenversicherungen für eine finanziell gesicherte Zukunft und Ihre Familie.',
-    },
-    {
-      key: 'rechtsschutz',
-      icon: Scale,
-      title: 'Rechtsschutz',
-      description: 'Übernahme von Anwalts- und Gerichtskosten zur verlässlichen Durchsetzung Ihrer berechtigten Interessen.',
-    },
-  ];
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.05,
-      },
-    },
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' as any } },
-  };
-
   return (
-    <section id="leistungen" className="bg-neutral-light/50 py-20 lg:py-28 relative">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-primary">Sicherheit & Vorsorge</span>
-          <h2 className="text-3xl font-bold tracking-tight text-neutral-dark sm:text-4xl">
-            Unsere Leistungen im Überblick
-          </h2>
-          <p className="text-sm text-neutral-muted">
-            Versicherung und Vorsorge für das, was Ihnen im Leben wichtig ist. Finden Sie den passenden Schutz.
-          </p>
-          <div className="mx-auto h-1 w-12 bg-primary rounded-full mt-2" />
-        </div>
-
-        {/* Services Grid */}
+    <section id="leistungen" className="section-shell px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(280px,0.8fr)_minmax(0,1.2fr)]">
         <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-100px' }}
-          className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.55 }}
+          className="min-w-0 lg:sticky lg:top-28 lg:self-start"
         >
-          {servicesList.map((service) => {
-            const Icon = service.icon;
-            return (
-              <motion.div
-                key={service.key}
-                variants={cardVariants}
-                onClick={() => onSelectService(service.key)}
-                className="group relative flex flex-col justify-between rounded-2xl border border-neutral-100 bg-white p-8 text-left transition-all duration-300 hover:shadow-xl hover:shadow-primary/5 hover:border-primary/20 hover:-translate-y-1 cursor-pointer"
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/5 text-primary group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                      <Icon className="h-6 w-6" />
-                    </div>
-                    <span className="text-neutral-muted/40 group-hover:text-primary transition-colors duration-300">
-                      <ArrowUpRight className="h-5 w-5 transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform duration-300" />
-                    </span>
-                  </div>
-
-                  <h3 className="mt-6 text-lg font-bold text-neutral-dark group-hover:text-primary transition-colors duration-300">
-                    {service.title}
-                  </h3>
-                  <p className="mt-3 text-sm text-neutral-muted leading-relaxed">
-                    {service.description}
-                  </p>
-                </div>
-
-                <div className="mt-6 flex items-center gap-1.5 text-xs font-bold text-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span>Termin anfragen</span>
-                </div>
-              </motion.div>
-            );
-          })}
+          <span className="eyebrow">Leistungen</span>
+          <h2 className="mt-8 text-4xl leading-tight text-secondary sm:text-5xl">
+            Was wir
+            <br />
+            für Sie schützen.
+          </h2>
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-neutral-muted">
+            Keine austauschbaren Pakete. Wir schauen, welche Risiken zu Ihrem Leben, Ihrem Betrieb und Ihrer Planung passen.
+          </p>
+          <div className="paper-panel mt-10 rounded-[1.8rem] p-6">
+            <p className="text-sm uppercase tracking-[0.22em] text-primary">Für Privat- und Firmenkunden</p>
+            <p className="mt-3 text-base leading-relaxed text-neutral-muted">
+              Jede Kategorie führt direkt zu einer persönlichen Anfrage. So bleibt der nächste Schritt einfach und menschlich.
+            </p>
+          </div>
         </motion.div>
 
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.6, delay: 0.05 }}
+          className="min-w-0 space-y-4"
+        >
+          {services.map((service, index) => (
+            <button
+              key={service.key}
+              type="button"
+              onClick={() => onSelectService(service.key)}
+              className={`paper-panel group block w-full rounded-[1.8rem] p-6 text-left transition-transform duration-200 hover:-translate-y-0.5 ${
+                index % 2 === 1 ? 'lg:ml-12' : ''
+              }`}
+            >
+              <div className="grid gap-4 sm:grid-cols-[72px_minmax(0,1fr)_auto] sm:items-start">
+                <div className="text-3xl text-primary sm:text-4xl">{String(index + 1).padStart(2, '0')}</div>
+                <div>
+                  <h3 className="text-2xl text-secondary">{service.title}</h3>
+                  <p className="mt-2 max-w-2xl text-base leading-relaxed text-neutral-muted">{service.description}</p>
+                </div>
+                <div className="self-center text-sm uppercase tracking-[0.2em] text-neutral-muted transition-colors group-hover:text-primary">
+                  Termin
+                </div>
+              </div>
+            </button>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

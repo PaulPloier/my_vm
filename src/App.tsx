@@ -14,7 +14,6 @@ import { LegalModal } from './components/LegalModals';
 export default function App() {
   const [isAppointmentOpen, setIsAppointmentOpen] = useState(false);
   const [selectedService, setSelectedService] = useState('');
-  
   const [isLegalOpen, setIsLegalOpen] = useState(false);
   const [legalVariant, setLegalVariant] = useState<'impressum' | 'datenschutz' | 'cookies' | 'barrierefreiheit' | null>(null);
 
@@ -28,54 +27,39 @@ export default function App() {
     setIsLegalOpen(true);
   };
 
-  const handleExploreServices = () => {
-    const el = document.getElementById('leistungen');
-    if (el) {
-      const offset = 80;
-      const bodyRect = document.body.getBoundingClientRect().top;
-      const elementRect = el.getBoundingClientRect().top;
-      const elementPosition = elementRect - bodyRect;
-      const offsetPosition = elementPosition - offset;
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    if (!element) return;
 
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth',
-      });
-    }
+    const offset = 88;
+    const bodyRect = document.body.getBoundingClientRect().top;
+    const elementRect = element.getBoundingClientRect().top;
+    const elementPosition = elementRect - bodyRect;
+    const offsetPosition = elementPosition - offset;
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth',
+    });
   };
 
   return (
-    <div className="min-h-screen bg-neutral-light flex flex-col justify-between">
-      {/* Sticky Header Navigation */}
+    <div className="min-h-screen bg-neutral-light text-neutral-dark">
       <Navbar onOpenAppointment={() => handleOpenAppointment()} />
 
-      <main className="flex-grow">
-        {/* 1. Hero Section */}
+      <main>
         <Hero
           onOpenAppointment={() => handleOpenAppointment()}
-          onExploreServices={handleExploreServices}
+          onExploreServices={() => scrollToSection('leistungen')}
         />
-
-        {/* 2. Vertrauensbereich / Trust Badges */}
         <Trust />
-
-        {/* 3. Über Uns */}
         <About />
-
-        {/* 4. Leistungen Grid */}
         <Services onSelectService={(key) => handleOpenAppointment(key)} />
-
-        {/* 5. Schadensfall Betreuung */}
-        <Claims onOpenAppointment={() => handleOpenAppointment()} />
-
-        {/* 6. Team Section */}
         <Team />
-
-        {/* 7. Kontakt Section (Details, Hours, inline Message & Google Maps) */}
-        <Contact />
+        <Claims onOpenAppointment={() => handleOpenAppointment()} />
+        <Contact onOpenAppointment={() => handleOpenAppointment()} />
       </main>
 
-      {/* 8. Footer Section */}
       <Footer
         onOpenImpressum={() => handleOpenLegal('impressum')}
         onOpenDatenschutz={() => handleOpenLegal('datenschutz')}
@@ -83,7 +67,6 @@ export default function App() {
         onOpenBarrierefreiheit={() => handleOpenLegal('barrierefreiheit')}
       />
 
-      {/* Modal overlays */}
       <AppointmentModal
         isOpen={isAppointmentOpen}
         onClose={() => setIsAppointmentOpen(false)}

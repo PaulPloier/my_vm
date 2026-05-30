@@ -1,74 +1,71 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Quote } from 'lucide-react';
 
 export const About: React.FC = () => {
   return (
-    <section id="ueber-uns" className="relative overflow-hidden bg-white py-20 lg:py-28">
-      {/* Background visual element */}
-      <div className="absolute top-1/2 left-1/2 -z-10 h-[500px] w-[500px] -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary/2 blur-[100px]" />
-
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center space-y-12">
-          
-          {/* Section Header */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="space-y-3"
-          >
-            <span className="text-xs font-bold uppercase tracking-widest text-primary">Unsere Philosophie</span>
-            <h2 className="text-3xl font-bold tracking-tight text-neutral-dark sm:text-4xl">
-              Wer wir sind & was uns bewegt
-            </h2>
-            <div className="mx-auto h-1 w-12 bg-primary rounded-full" />
-          </motion.div>
-
-          {/* Slogan Quote Block (Premium styling) */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.98 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="relative rounded-2xl bg-neutral-light/50 border border-neutral-100 p-8 md:p-12 shadow-sm"
-          >
-            <Quote className="absolute top-4 left-4 h-12 w-12 text-primary/10 -rotate-12 pointer-events-none" />
-            <span className="relative block text-2xl md:text-3xl font-extrabold italic text-primary leading-snug tracking-tight">
-              „Versichern heisst vertrauen“
-            </span>
-          </motion.div>
-
-          {/* Description Columns */}
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="grid grid-cols-1 md:grid-cols-2 gap-8 text-left text-neutral-muted leading-relaxed text-base"
-          >
-            <div className="space-y-4">
-              <p>
-                Beim Thema Versicherung und Vorsorge sind Sie bei uns an der richtigen Adresse. Als unabhängiger Versicherungsmakler sind wir für Ihre Versicherungs- und Vorsorgefragen der richtige Ansprechpartner.
-              </p>
-              <p>
-                Bereits seit 25 Jahren vertrauen uns unsere Kunden, denn <strong>VERSICHERN HEISST VERTRAUEN</strong> wird bei uns großgeschrieben. Die Betreuung der Kunden sowie die Zufriedenheit im Schadensfall steht bei uns an erster Stelle.
-              </p>
+    <section id="ueber-uns" className="section-shell px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,0.95fr)_minmax(360px,1.05fr)] lg:items-start">
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.55 }}
+          className="min-w-0 max-w-2xl"
+        >
+          <span className="eyebrow">Über uns</span>
+          <h2 className="mt-8 text-4xl leading-tight text-secondary sm:text-5xl">
+            Wir kennen Rohrbach.
+            <br />
+            Und wir kennen Ihre Fragen.
+          </h2>
+          <div className="mt-8 space-y-5 text-lg leading-relaxed text-neutral-muted">
+            <p>
+              Als unabhängiger Versicherungsmakler begleiten wir Privat- und Firmenkunden seit mehr als zwei Jahrzehnten.
+              Nicht mit Standardsätzen, sondern mit Gesprächen, die zur Lebensrealität unserer Region passen.
+            </p>
+            <p>
+              Wer zu uns kommt, spricht mit Menschen, die erreichbar sind, die Versicherungen vergleichen und die auch dann
+              dranbleiben, wenn ein Schadensfall Zeit und Ruhe braucht.
+            </p>
+          </div>
+          <div className="mt-10 flex flex-wrap gap-6">
+            <div className="min-w-[150px] border-l border-primary pl-4">
+              <p className="text-3xl text-primary">Rohrbach-Berg</p>
+              <p className="mt-1 text-sm uppercase tracking-[0.16em] text-neutral-muted">Regional verankert</p>
             </div>
-            <div className="space-y-4 flex flex-col justify-between">
-              <p>
-                Die Devise unserer Kunden lautet: Um das Thema Versicherung und Vorsorge kümmert sich MY Versicherungsmakler. Das gibt Ihnen die Freiheit und Sicherheit, sich voll und ganz auf das Wesentliche zu konzentrieren.
-              </p>
-              <div className="border-l-2 border-primary/20 pl-4 py-1 mt-4 md:mt-0 bg-primary/2 rounded-r-lg p-3">
-                <p className="text-xs font-semibold text-neutral-dark">
-                  Egal ob Privatkunde oder Firmenkunde, vereinbaren Sie einen Termin mit unserem Team und Sie werden zufrieden sein.
-                </p>
-              </div>
+            <div className="min-w-[150px] border-l border-primary pl-4">
+              <p className="text-3xl text-primary">Privat &amp; Betrieb</p>
+              <p className="mt-1 text-sm uppercase tracking-[0.16em] text-neutral-muted">Persönlich begleitet</p>
             </div>
-          </motion.div>
+          </div>
+        </motion.div>
 
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: 24 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.65, delay: 0.08 }}
+          className="relative min-w-0 lg:pt-8"
+        >
+          <div className="paper-panel overflow-hidden rounded-[2rem]">
+            <img
+              src="/images/hero-bg.jpg"
+              alt="Gebäude und Büro von my Versicherungsmakler"
+              className="aspect-[5/4] w-full object-cover"
+              loading="lazy"
+            />
+          </div>
+
+          <div className="paper-panel relative -mt-12 ml-auto max-w-md rounded-[1.6rem] p-6 sm:mr-8">
+            <p className="text-sm uppercase tracking-[0.22em] text-primary">Unser Leitmotiv</p>
+            <p className="mt-4 text-3xl leading-tight text-secondary">
+              „Versichern heißt Vertrauen“
+            </p>
+            <p className="mt-4 text-base leading-relaxed text-neutral-muted">
+              Dieses Vertrauen entsteht nicht online in Sekunden, sondern über Beratung, Verlässlichkeit und ehrliche Erreichbarkeit.
+            </p>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

@@ -1,6 +1,5 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ShieldAlert, PhoneCall, Mail } from 'lucide-react';
 
 interface ClaimsProps {
   onOpenAppointment: () => void;
@@ -8,82 +7,54 @@ interface ClaimsProps {
 
 export const Claims: React.FC<ClaimsProps> = ({ onOpenAppointment }) => {
   return (
-    <section className="relative overflow-hidden bg-primary-dark py-20 text-white">
-      {/* Decorative vector ring */}
-      <div className="absolute -top-24 -right-24 h-96 w-96 rounded-full border border-white/5 pointer-events-none" />
-      <div className="absolute -bottom-24 -left-24 h-96 w-96 rounded-full border border-white/5 pointer-events-none" />
+    <section className="px-4 py-20 sm:px-6 lg:px-8 lg:py-28">
+      <div className="mx-auto grid max-w-7xl gap-8 rounded-[2.2rem] bg-secondary px-6 py-10 text-paper sm:px-10 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:px-14 lg:py-14">
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.55 }}
+        >
+          <p className="text-xs uppercase tracking-[0.24em] text-accent-soft">Warum unabhängig?</p>
+          <h2 className="mt-5 text-4xl leading-tight sm:text-5xl">
+            Wir vertreten nicht
+            <br />
+            eine Gesellschaft.
+            <br />
+            Wir vertreten Sie.
+          </h2>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-paper/78">
+            Genau das macht den Unterschied zwischen Makler und Vertreter. Wir vergleichen, ordnen ein und bleiben an Ihrer Seite, wenn ein Schadenfall Ruhe, Erfahrung und klare Kommunikation braucht.
+          </p>
+        </motion.div>
 
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 relative">
-        <div className="flex flex-col items-center text-center space-y-8">
-          
-          {/* Accent Icon Container */}
-          <motion.div
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            className="flex h-16 w-16 items-center justify-center rounded-full bg-white/10 text-white backdrop-blur-md shadow-inner"
-          >
-            <ShieldAlert className="h-8 w-8" />
-          </motion.div>
-
-          {/* Heading */}
-          <motion.div
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="space-y-3"
-          >
-            <span className="text-xs font-bold uppercase tracking-widest text-primary-light">Immer für Sie da</span>
-            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Auch im Schadensfall persönlich an Ihrer Seite
-            </h2>
-          </motion.div>
-
-          {/* Text Statement */}
-          <motion.p
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-base text-white/80 max-w-2xl leading-relaxed"
-          >
-            Ein Schadensfall ist ärgerlich genug. Als Ihr Versicherungsmakler lassen wir Sie nicht mit unübersichtlichen Hotlines allein. Die persönliche Betreuung unserer Kunden sowie Ihre Zufriedenheit im Schadensfall steht bei MY Versicherungsmakler an erster Stelle.
-          </motion.p>
-
-          {/* Direct CTA Panel */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col sm:flex-row gap-4 pt-4 w-full justify-center items-center"
-          >
+        <motion.div
+          initial={{ opacity: 0, y: 22 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.6, delay: 0.05 }}
+          className="paper-panel rounded-[1.8rem] bg-paper/10 p-6 text-paper"
+        >
+          <p className="text-sm uppercase tracking-[0.22em] text-accent-soft">Im Schadensfall</p>
+          <p className="mt-4 text-2xl leading-tight">Persönlich erreichbar, wenn es darauf ankommt.</p>
+          <p className="mt-4 text-base leading-relaxed text-paper/76">
+            Kein Wechsel durch Callcenter, keine endlosen Weiterleitungen. Sie erreichen uns telefonisch, per E-Mail oder direkt vor Ort in Rohrbach-Berg.
+          </p>
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <button
               onClick={onOpenAppointment}
-              className="inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3.5 text-base font-semibold text-primary hover:bg-neutral-50 transition-colors shadow-lg active:scale-98 cursor-pointer"
+              className="rounded-full bg-accent px-6 py-3 text-sm font-semibold text-secondary"
             >
-              Termin zur Beratung vereinbaren
+              Beratungstermin anfragen
             </button>
-            <div className="flex gap-4">
-              <a
-                href="tel:+4372895072"
-                className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-white/10 hover:bg-white/20 transition-colors text-white"
-                title="Jetzt anrufen"
-              >
-                <PhoneCall className="h-5 w-5" />
-              </a>
-              <a
-                href="mailto:rohrbach@myvm.at"
-                className="inline-flex items-center justify-center h-12 w-12 rounded-xl bg-white/10 hover:bg-white/20 transition-colors text-white"
-                title="E-Mail schreiben"
-              >
-                <Mail className="h-5 w-5" />
-              </a>
-            </div>
-          </motion.div>
-
-        </div>
+            <a
+              href="tel:+4372895072"
+              className="rounded-full border border-paper/25 px-6 py-3 text-sm font-semibold text-paper transition-colors hover:bg-paper/10"
+            >
+              +43 (0) 7289 / 5072
+            </a>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

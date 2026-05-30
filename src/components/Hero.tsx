@@ -1,132 +1,105 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Calendar, ArrowRight, ShieldCheck, CheckCircle2, Award } from 'lucide-react';
 
 interface HeroProps {
   onOpenAppointment: () => void;
   onExploreServices: () => void;
 }
 
+const stats = [
+  { value: '25', label: 'Jahre Erfahrung' },
+  { value: '7', label: 'Experten im Team' },
+  { value: '9', label: 'Leistungsbereiche' },
+];
+
 export const Hero: React.FC<HeroProps> = ({ onOpenAppointment, onExploreServices }) => {
   return (
-    <section
-      id="home"
-      className="relative overflow-hidden bg-gradient-to-b from-neutral-light via-white to-neutral-light pt-24 pb-16 lg:pt-36 lg:pb-24"
-    >
-      {/* Decorative background blur blobs (Acrisure style) */}
-      <div className="absolute top-0 right-0 -z-10 h-[400px] w-[400px] rounded-full bg-primary/5 blur-3xl" />
-      <div className="absolute bottom-10 left-0 -z-10 h-[300px] w-[300px] rounded-full bg-primary-light/5 blur-2xl" />
+    <section id="home" className="section-shell relative overflow-hidden px-4 pb-20 pt-28 sm:px-6 lg:px-8 lg:pb-28 lg:pt-36">
+      <div className="absolute right-0 top-12 -z-10 h-72 w-72 rounded-full bg-primary/10 blur-[110px]" />
+      <div className="absolute bottom-0 left-0 -z-10 h-64 w-64 rounded-full bg-accent/10 blur-[100px]" />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-12 lg:grid-cols-12 lg:items-center">
-          
-          {/* Left Text Column */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, ease: 'easeOut' }}
-            className="lg:col-span-7 flex flex-col text-left space-y-6"
-          >
-            {/* Eyebrow / Slogan */}
-            <div className="inline-flex items-center gap-2">
-              <span className="h-px w-8 bg-primary" />
-              <span className="text-xs font-bold uppercase tracking-wider text-primary">
-                Versichern heisst vertrauen
-              </span>
+      <div className="mx-auto grid max-w-7xl gap-14 lg:grid-cols-[minmax(0,1.15fr)_minmax(360px,0.85fr)] lg:items-center">
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.65, ease: 'easeOut' }}
+          className="min-w-0 max-w-3xl"
+        >
+          <span className="eyebrow">Seit 25 Jahren in Rohrbach-Berg</span>
+          <h1 className="mt-8 max-w-3xl text-5xl leading-[0.98] text-secondary sm:text-6xl lg:text-[5.4rem]">
+            Versichern
+            <br />
+            heißt Vertrauen.
+          </h1>
+          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-neutral-muted sm:text-xl">
+            Persönliche Beratung, unabhängige Vergleiche und ein Team, das Ihre Fragen aus dem Alltag in Oberösterreich kennt.
+            Für Privat- und Firmenkunden, die einen verlässlichen Ansprechpartner statt Konzernsprache suchen.
+          </p>
+
+          <div className="mt-10 flex flex-col gap-4 sm:flex-row">
+            <button
+              onClick={onOpenAppointment}
+              className="rounded-full bg-accent px-7 py-3.5 text-base font-semibold text-secondary transition-transform duration-200 hover:-translate-y-0.5"
+            >
+              Termin vereinbaren
+            </button>
+            <button
+              onClick={onExploreServices}
+              className="rounded-full border border-line bg-paper/80 px-7 py-3.5 text-base font-semibold text-secondary transition-colors hover:border-primary/30 hover:text-primary"
+            >
+              Unsere Leistungen
+            </button>
+          </div>
+
+          <div className="mt-12 grid gap-5 border-t border-line pt-8 sm:grid-cols-3">
+            {stats.map((stat) => (
+              <div key={stat.label}>
+                <p className="text-4xl text-primary sm:text-[2.75rem]">{stat.value}</p>
+                <p className="mt-1 text-sm uppercase tracking-[0.18em] text-neutral-muted">{stat.label}</p>
+              </div>
+            ))}
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.08, ease: 'easeOut' }}
+          className="relative min-w-0 lg:pl-8"
+        >
+          <div className="grain-outline relative mx-auto max-w-xl">
+            <div className="overflow-hidden rounded-[2rem] bg-secondary">
+              <img
+                src="/images/hero-bg.jpg"
+                alt="Standort von my Versicherungsmakler in Rohrbach-Berg"
+                className="aspect-[4/5] w-full object-cover"
+              />
             </div>
+          </div>
 
-            {/* Main H1 Title (SEO target) */}
-            <h1 className="text-4xl font-extrabold tracking-tight text-neutral-dark sm:text-5xl lg:text-6xl leading-[1.1]">
-              Herzlich Willkommen bei <br />
-              <span className="text-primary font-black">MY Versicherungsmakler</span>
-            </h1>
-
-            {/* Paragraph Text */}
-            <p className="text-base text-neutral-muted sm:text-lg leading-relaxed max-w-2xl">
-              Beim Thema Versicherung und Vorsorge sind Sie bei uns an der richtigen Adresse. Als unabhängiger Versicherungsmakler sind wir für Ihre Versicherungs- und Vorsorgefragen der richtige Ansprechpartner. Bereits seit 25 Jahren vertrauen uns unsere Kunden, denn <strong>VERSICHERN HEISST VERTRAUEN</strong> und das wird bei uns großgeschrieben.
+          <div className="paper-panel absolute -bottom-10 left-0 max-w-xs rounded-[1.75rem] p-5 sm:left-6">
+            <p className="text-xs uppercase tracking-[0.22em] text-primary">Kindergartenstraße 6</p>
+            <p className="mt-3 text-2xl leading-tight text-secondary">Rohrbach-Berg statt Hotline.</p>
+            <p className="mt-3 text-sm leading-relaxed text-neutral-muted">
+              Mo–Do 08:00–12:00 &amp; 13:00–17:00 Uhr
+              <br />
+              Fr 08:00–12:00 Uhr
             </p>
+          </div>
 
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-4">
-              <button
-                onClick={onOpenAppointment}
-                className="inline-flex items-center justify-center gap-2 rounded-xl bg-primary px-6 py-3.5 text-base font-semibold text-white shadow-lg shadow-primary/25 hover:bg-primary-light hover:shadow-xl transition-all duration-200 active:scale-98 cursor-pointer"
-              >
-                <Calendar className="h-5 w-5" />
-                Termin vereinbaren
-              </button>
-              <button
-                onClick={onExploreServices}
-                className="inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-200 bg-white px-6 py-3.5 text-base font-semibold text-neutral-dark shadow-sm hover:bg-neutral-50 hover:border-neutral-300 transition-all duration-200 active:scale-98 cursor-pointer"
-              >
-                Leistungen ansehen
-                <ArrowRight className="h-4 w-4" />
-              </button>
+          <div className="absolute -right-2 top-8 hidden w-40 rotate-[5deg] overflow-hidden rounded-[1.5rem] border border-primary/20 bg-paper shadow-[0_16px_36px_rgba(34,49,56,0.12)] sm:block lg:-right-8">
+            <img
+              src="/images/team_andrea.jpg"
+              alt="Andrea Höglinger"
+              className="aspect-[4/5] w-full object-cover grayscale"
+              loading="lazy"
+            />
+            <div className="border-t border-line px-4 py-3">
+              <p className="text-sm text-secondary">Andrea Höglinger</p>
+              <p className="mt-1 text-[11px] uppercase tracking-[0.18em] text-primary">Geschäftsführerin</p>
             </div>
-
-            {/* Bottom Row Trust Badges */}
-            <div className="grid grid-cols-3 gap-4 border-t border-neutral-200/60 pt-8 mt-4">
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
-                  <Award className="h-5 w-5" />
-                </div>
-                <div className="text-left">
-                  <p className="text-xs font-bold text-neutral-dark">Seit 25 Jahren</p>
-                  <p className="text-[10px] text-neutral-muted">an Ihrer Seite</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
-                  <ShieldCheck className="h-5 w-5" />
-                </div>
-                <div className="text-left">
-                  <p className="text-xs font-bold text-neutral-dark">Unabhängig</p>
-                  <p className="text-[10px] text-neutral-muted">für beste Angebote</p>
-                </div>
-              </div>
-
-              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2">
-                <div className="rounded-lg bg-primary/10 p-1.5 text-primary">
-                  <CheckCircle2 className="h-5 w-5" />
-                </div>
-                <div className="text-left">
-                  <p className="text-xs font-bold text-neutral-dark">100% Persönlich</p>
-                  <p className="text-[10px] text-neutral-muted">Schadensbetreuung</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right Image Column */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.1, ease: 'easeOut' }}
-            className="lg:col-span-5 relative"
-          >
-            <div className="relative mx-auto max-w-[450px] lg:max-w-none">
-              {/* Image Frame Accent Border */}
-              <div className="absolute -inset-3 rounded-3xl border border-primary/10 -rotate-2 scale-102" />
-              
-              {/* Image Container */}
-              <div className="relative overflow-hidden rounded-2xl bg-neutral-100 shadow-2xl transition-transform duration-500 hover:scale-[1.01] rotate-1">
-                <img
-                  src="/images/hero-bg.jpg"
-                  alt="MY Versicherungsmakler Gebäude / Büro in Rohrbach-Berg"
-                  className="aspect-[4/3] w-full object-cover lg:aspect-[4/5] xl:aspect-[1/1]"
-                />
-                
-                {/* Visual Glass Tag */}
-                <div className="absolute bottom-4 left-4 right-4 rounded-xl bg-white/70 p-4 shadow-lg backdrop-blur-md border border-white/40 text-left">
-                  <p className="text-sm font-bold text-neutral-dark">MY Versicherungsmakler</p>
-                  <p className="text-xs text-neutral-muted">Ihr verlässlicher Partner in Rohrbach-Berg & Neustift</p>
-                </div>
-              </div>
-            </div>
-          </motion.div>
-
-        </div>
+          </div>
+        </motion.div>
       </div>
     </section>
   );

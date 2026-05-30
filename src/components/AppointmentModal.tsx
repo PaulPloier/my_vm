@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { AnimatePresence, motion } from 'framer-motion';
-import { X, Calendar, CheckCircle2 } from 'lucide-react';
+import { Calendar, CheckCircle2, X } from 'lucide-react';
 
 interface AppointmentModalProps {
   isOpen: boolean;
@@ -21,26 +21,10 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
     message: '',
     privacyAccepted: false,
   });
-
-  React.useEffect(() => {
-    if (selectedService) {
-      setFormData((prev) => ({ ...prev, service: selectedService }));
-    }
-  }, [selectedService]);
-
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const serviceValue = formData.service || selectedService;
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!formData.privacyAccepted) return;
-    
-    // Simulate API request
-    setTimeout(() => {
-      setIsSubmitted(true);
-    }, 600);
-  };
-
-  const handleReset = () => {
+  const handleDismiss = () => {
     setFormData({
       name: '',
       email: '',
@@ -53,158 +37,162 @@ export const AppointmentModal: React.FC<AppointmentModalProps> = ({
     onClose();
   };
 
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!formData.privacyAccepted) return;
+
+    setTimeout(() => {
+      setIsSubmitted(true);
+    }, 600);
+  };
+
+  const handleReset = () => {
+    handleDismiss();
+  };
+
   return (
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-          {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            onClick={onClose}
-            className="absolute inset-0 bg-neutral-dark/40 backdrop-blur-sm"
+            onClick={handleDismiss}
+            className="absolute inset-0 bg-secondary/40 backdrop-blur-sm"
           />
 
-          {/* Modal Container */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            initial={{ opacity: 0, scale: 0.96, y: 18 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.95, y: 20 }}
-            transition={{ type: 'spring', duration: 0.5 }}
-            className="relative w-full max-w-lg overflow-hidden rounded-2xl bg-white p-6 shadow-2xl md:p-8"
+            exit={{ opacity: 0, scale: 0.96, y: 18 }}
+            transition={{ type: 'spring', duration: 0.45 }}
+            className="relative w-full max-w-xl rounded-[1.9rem] border border-line bg-paper p-6 shadow-[0_24px_55px_rgba(34,49,56,0.22)] md:p-8"
           >
-            {/* Close Button */}
             <button
-              onClick={onClose}
-              className="absolute top-4 right-4 text-neutral-muted hover:text-primary transition-colors focus:outline-none"
+              onClick={handleDismiss}
+              className="absolute right-4 top-4 rounded-full border border-line p-2 text-neutral-muted transition-colors hover:text-primary"
               aria-label="Schließen"
             >
-              <X className="h-6 w-6" />
+              <X className="h-5 w-5" />
             </button>
 
             {!isSubmitted ? (
               <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="flex items-center gap-3 mb-2">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                <div className="mb-3 flex items-center gap-3">
+                  <div className="flex h-11 w-11 items-center justify-center rounded-full bg-primary/10 text-primary">
                     <Calendar className="h-5 w-5" />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-neutral-dark">Termin vereinbaren</h3>
-                    <p className="text-xs text-neutral-muted">Wir melden uns verlässlich bei Ihnen.</p>
+                    <h3 className="text-2xl text-secondary">Termin vereinbaren</h3>
+                    <p className="text-sm text-neutral-muted">Wir melden uns persönlich bei Ihnen zurück.</p>
                   </div>
                 </div>
 
                 <div className="space-y-3">
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-dark mb-1">Name *</label>
+                    <label className="mb-1 block text-sm text-secondary">Name *</label>
                     <input
                       type="text"
                       required
-                      placeholder="Ihr Vor- und Nachname"
-                      className="w-full rounded-lg border border-neutral-200 px-3.5 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                      placeholder="Ihr Vor- und Nachname"
+                      className="w-full rounded-[1rem] border border-line bg-white px-4 py-3 text-secondary outline-none transition-colors focus:border-primary"
                     />
                   </div>
 
-                  <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                  <div className="grid gap-3 sm:grid-cols-2">
                     <div>
-                      <label className="block text-xs font-semibold text-neutral-dark mb-1">E-Mail-Adresse *</label>
+                      <label className="mb-1 block text-sm text-secondary">E-Mail-Adresse *</label>
                       <input
                         type="email"
                         required
-                        placeholder="ihre@mail.at"
-                        className="w-full rounded-lg border border-neutral-200 px-3.5 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                         value={formData.email}
                         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                        placeholder="ihre@mail.at"
+                        className="w-full rounded-[1rem] border border-line bg-white px-4 py-3 text-secondary outline-none transition-colors focus:border-primary"
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold text-neutral-dark mb-1">Telefonnummer</label>
+                      <label className="mb-1 block text-sm text-secondary">Telefonnummer</label>
                       <input
                         type="tel"
-                        placeholder="z.B. +43 664..."
-                        className="w-full rounded-lg border border-neutral-200 px-3.5 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all"
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                        placeholder="z. B. +43 664 ..."
+                        className="w-full rounded-[1rem] border border-line bg-white px-4 py-3 text-secondary outline-none transition-colors focus:border-primary"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-dark mb-1">Gewünschter Bereich</label>
+                    <label className="mb-1 block text-sm text-secondary">Leistungsbereich</label>
                     <select
-                      className="w-full rounded-lg border border-neutral-200 px-3.5 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all bg-white"
-                      value={formData.service}
+                      value={serviceValue}
                       onChange={(e) => setFormData({ ...formData, service: e.target.value })}
+                      className="w-full rounded-[1rem] border border-line bg-white px-4 py-3 text-secondary outline-none transition-colors focus:border-primary"
                     >
                       <option value="">Bitte wählen Sie einen Bereich</option>
-                      <option value="betrieb">Betriebsversicherung</option>
-                      <option value="eigenheim">Eigenheim & Haushalt</option>
-                      <option value="krankheit">Unfall & Krankheit</option>
+                      <option value="betrieb">Betrieb</option>
+                      <option value="eigenheim">Eigenheim</option>
+                      <option value="krankheit">Unfall/Krankheit</option>
                       <option value="berufsunfaehigkeit">Berufsunfähigkeit</option>
-                      <option value="kfz">KFZ-Versicherung</option>
+                      <option value="kfz">KFZ</option>
                       <option value="landwirtschaft">Landwirtschaft</option>
-                      <option value="vorsorge">Vorsorge & Leben</option>
+                      <option value="haushalt">Haushalt</option>
+                      <option value="vorsorge">Vorsorge/Leben</option>
                       <option value="rechtsschutz">Rechtsschutz</option>
-                      <option value="sonstiges">Sonstiges Anliegen</option>
                     </select>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold text-neutral-dark mb-1">Ihre Nachricht</label>
+                    <label className="mb-1 block text-sm text-secondary">Ihre Nachricht</label>
                     <textarea
-                      rows={3}
-                      placeholder="Wie können wir Ihnen helfen?"
-                      className="w-full rounded-lg border border-neutral-200 px-3.5 py-2 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary transition-all resize-none"
+                      rows={4}
                       value={formData.message}
                       onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                      placeholder="Worum geht es in Ihrem Anliegen?"
+                      className="w-full rounded-[1rem] border border-line bg-white px-4 py-3 text-secondary outline-none transition-colors focus:border-primary"
                     />
                   </div>
 
-                  <div className="flex items-start gap-2.5 pt-1">
+                  <label className="flex items-start gap-3 pt-2 text-sm leading-relaxed text-neutral-muted">
                     <input
                       id="privacyAccepted"
                       type="checkbox"
                       required
-                      className="mt-1 h-4 w-4 rounded border-neutral-200 text-primary focus:ring-primary"
                       checked={formData.privacyAccepted}
                       onChange={(e) => setFormData({ ...formData, privacyAccepted: e.target.checked })}
+                      className="mt-1 h-4 w-4 rounded border-line text-primary focus:ring-primary"
                     />
-                    <label htmlFor="privacyAccepted" className="text-xs text-neutral-muted leading-snug">
-                      Ich stimme zu, dass meine Daten zur Kontaktaufnahme gespeichert und verarbeitet werden. *
-                    </label>
-                  </div>
+                    <span>Ich stimme zu, dass meine Daten zur Kontaktaufnahme gespeichert und verarbeitet werden. *</span>
+                  </label>
                 </div>
 
-                <div className="pt-2">
-                  <button
-                    type="submit"
-                    className="w-full rounded-lg bg-primary px-4 py-2.5 text-center text-sm font-semibold text-white shadow-md hover:bg-primary-light hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary/50 active:scale-[0.98] transition-all cursor-pointer"
-                  >
-                    Anfrage senden
-                  </button>
-                </div>
+                <button
+                  type="submit"
+                  className="mt-2 w-full rounded-full bg-accent px-5 py-3.5 text-sm font-semibold text-secondary"
+                >
+                  Anfrage senden
+                </button>
               </form>
             ) : (
               <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
+                initial={{ opacity: 0, scale: 0.98 }}
                 animate={{ opacity: 1, scale: 1 }}
-                className="flex flex-col items-center text-center py-6 space-y-4"
+                className="flex flex-col items-center py-8 text-center"
               >
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-green-50 text-green-600">
-                  <CheckCircle2 className="h-10 w-10" />
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-primary/12 text-primary">
+                  <CheckCircle2 className="h-9 w-9" />
                 </div>
-                <div className="space-y-2">
-                  <h3 className="text-2xl font-bold text-neutral-dark">Vielen Dank!</h3>
-                  <p className="text-sm text-neutral-muted max-w-sm">
-                    Ihre Anfrage zur Terminvereinbarung wurde erfolgreich an uns übermittelt. Wir werden uns in Kürze persönlich bei Ihnen melden.
-                  </p>
-                </div>
+                <h3 className="mt-5 text-3xl text-secondary">Vielen Dank.</h3>
+                <p className="mt-3 max-w-sm text-base leading-relaxed text-neutral-muted">
+                  Ihre Anfrage wurde vorbereitet. Für die Live-Website kann hier im nächsten Schritt die echte Übergabe an E-Mail oder Formular-Backend angeschlossen werden.
+                </p>
                 <button
                   onClick={handleReset}
-                  className="rounded-lg border border-neutral-200 bg-white px-5 py-2 text-sm font-semibold text-neutral-dark shadow-sm hover:bg-neutral-50 focus:outline-none transition-all cursor-pointer"
+                  className="mt-6 rounded-full border border-line px-5 py-2.5 text-sm font-semibold text-secondary"
                 >
                   Schließen
                 </button>
